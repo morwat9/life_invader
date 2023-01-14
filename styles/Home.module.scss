@@ -1,0 +1,108 @@
+@use './utils' as utils;
+
+.wrapper {
+    background-color: utils.$color-gray;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    padding: 1em 2em;
+
+    @include utils.extra-small {
+        padding: 1em 0;
+    }
+}
+
+.home-container {
+    width: 986px;
+    margin: auto;
+    gap: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    @include utils.large {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+    }
+
+    @include utils.extra-small {
+        width: auto;
+        gap: 2em;
+    }
+}
+
+.greeting {
+    width: 370px;
+
+    p {
+        margin: 10px
+    }
+
+    @include utils.large {
+        width: auto;
+    }
+
+    @include utils.extra-small {
+        width: auto;
+        text-align: center;
+        padding: 1em;
+
+    }
+
+}
+
+.greeting-message {
+    font-size: 2em;
+
+    @include utils.extra-small {
+        font-size: 1em;
+    }
+
+}
+
+.brand {
+    font-size: 3em;
+    color: utils.$color-orange;
+
+    p {
+        font-weight: 600;
+    }
+
+    @include utils.extra-small {
+        font-size: 2.5em
+    }
+}
+
+.login {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    padding: 1.5em;
+    background-color: utils.$color-white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    text-align: center;
+    width: 370px;
+
+    @include utils.extra-small {
+        width: 70%;
+        max-width: 300px;
+    }
+}
+
+.break {
+    height: 1px;
+    border-top: 1px solid rgba(0, 0, 0, 0.23);
+}
+
+.forgot {
+    color: utils.$color-light-blue;
+
+    p {
+        margin: 0;
+        cursor: pointer;
+        display: inline;
+    }
+}
