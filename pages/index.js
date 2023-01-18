@@ -1,13 +1,47 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Share_Tech_Mono, Fira_Sans } from '@next/font/google'
-import styles from '../styles/Home.module.scss'
-import { TextField, Button } from '@mui/material'
+import Head from "next/head";
+import Image from "next/image";
+import { Share_Tech_Mono, Fira_Sans } from "@next/font/google";
+import styles from "../styles/Home.module.scss";
+import { TextField, Button } from "@mui/material";
+import { useCookies } from "react-cookie";
+import { useState } from "react";
+import axios from "axios";
 
-const shareTechMono = Share_Tech_Mono({ subsets: ['latin'], weight: '400' })
-const firaSans = Fira_Sans({ subsets: ['latin'], weight: '400'})
+const shareTechMono = Share_Tech_Mono({ subsets: ["latin"], weight: "400" });
+const firaSans = Fira_Sans({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [err, setErr] = useState(false);
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  function handleInput(value) {
+    setLogin({ email: value.email, password: value.password });
+    setErr(false);
+    //TODO: Error handling for failed login attempts or validation
+  }
+
+  // all requests besides login will need this in the header to get db info. example vvvv
+  // const headers = { 'x-access-token': `${cookies.token}`}
+  // const response = await axios.get("http://localhost:3000/users", {headers})
+  async function signIn(e) {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/users/login",
+        login
+      );
+      setCookie("token", response.data.accessToken);
+      console.log(response);
+    } catch (error) {
+      setErr(true);
+      console.log(error.response);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -17,27 +51,67 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className={styles['wrapper']}>
-          <div className={styles['home-container']}>
-            <div className={styles['greeting']}>
-              <div className={styles['brand']}><p className={shareTechMono.className}>life_invader</p></div>
-              <div className={styles['greeting-message']}>
-                <p className={firaSans.className}>Connect with friends and the world around you at life_invader.</p>
+        <div className={styles["wrapper"]}>
+          <div className={styles["home-container"]}>
+            <div className={styles["greeting"]}>
+              <div className={styles["brand"]}>
+                <p className={shareTechMono.className}>life_invader</p>
+              </div>
+              <div className={styles["greeting-message"]}>
+                <p className={firaSans.className}>
+                  Connect with friends and the world around you at life_invader.
+                </p>
               </div>
             </div>
-            <div className={styles['login']}>
-              <TextField label="Email" />
-              <TextField label="Password" />
-              <Button variant="contained" size='large'><b>Log In</b></Button>
-              <div className={styles['forgot']}><p>Forgot Password?</p></div>
-              <div className={styles['break']}></div>
-              <div>
-                <Button variant="contained" color="secondary" size='large'><b>Sign Up</b></Button>
+            <form onSubmit={(e) => signIn(e)}>
+              <div className={styles["login"]}>
+                <TextField
+                  label="Email"
+                  error={err}
+                  onChange={(e) =>
+                    handleInput({
+                      email: e.target.value,
+                      password: login.password,
+                    })
+                  }
+                />
+                <TextField
+                  label="Password"
+                  type="password"
+                  error={err}
+                  onChange={(e) =>
+                    handleInput({
+                      email: login.email,
+                      password: e.target.value,
+                    })
+                  }
+                />
+                {err ? (
+                  <span className={styles["error"]}>
+                    <span className={firaSans.className}>
+                      Invalid email or password
+                    </span>
+                  </span>
+                ) : (
+                  <span></span>
+                )}
+                <Button variant="contained" size="large" type="submit">
+                  <b>Log In</b>
+                </Button>
+                <div className={styles["forgot"]}>
+                  <p className={firaSans.className}>Forgot Password?</p>
+                </div>
+                <div className={styles["break"]}></div>
+                <div>
+                  <Button variant="contained" color="secondary" size="large">
+                    <b>Sign Up</b>
+                  </Button>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </main>
     </>
-  )
+  );
 }

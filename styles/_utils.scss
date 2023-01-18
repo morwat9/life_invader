@@ -1,8 +1,8 @@
-$color-white: #FFFFFF;
-$color-gray: #E5E5E5;
-$color-orange: #FCA311;
+$color-white: #ffffff;
+$color-gray: #e5e5e5;
+$color-orange: #fca311;
 $color-light-blue: #1976d2;
-$color-blue: #14213D;
+$color-blue: #14213d;
 $color-black: #000000;
 
 $small-width: 480px;
@@ -10,43 +10,43 @@ $medium-width: 768px;
 $large-width: 930px;
 
 @mixin extra-small {
-    @media (max-width: #{$small-width - 1px}){
-        @content;
-    }
+  @media (max-width: #{$small-width - 1px}) {
+    @content;
+  }
 }
 
 @mixin small-down {
-    @media (max-width: #{$medium-width - 1px}){
-        @content;
-    }
+  @media (max-width: #{$medium-width - 1px}) {
+    @content;
+  }
 }
 
 @mixin small-only {
-    @media (min-width: #{$small-width}) and (max-width: #{$medium-width - 1px}){
-        @content;
-    }
+  @media (min-width: #{$small-width}) and (max-width: #{$medium-width - 1px}) {
+    @content;
+  }
 }
 
 @mixin small-up {
-    @media (min-width: #{$small-width}){
-        @content;
-    }
+  @media (min-width: #{$small-width}) {
+    @content;
+  }
 }
 
 @mixin medium-only {
-    @media (min-width: #{$medium-width}) and (max-width: #{$large-width - 1px}){
-        @content;
-    }
+  @media (min-width: #{$medium-width}) and (max-width: #{$large-width - 1px}) {
+    @content;
+  }
 }
 
 @mixin medium-up {
-    @media (min-width: #{$medium-width}){
-        @content;
-    }
+  @media (min-width: #{$medium-width}) {
+    @content;
+  }
 }
 
 @mixin large {
-    @media (min-width: #{$large-width}){
-        @content;
-    }
+  @media (min-width: #{$large-width}) {
+    @content;
+  }
 }
