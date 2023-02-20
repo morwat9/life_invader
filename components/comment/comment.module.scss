@@ -1,0 +1,46 @@
+@use "../../styles/_utils.scss" as utils;
+
+.comment-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.profile-picture-container {
+  width: 50px;
+  height: 50px;
+  display: inline;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    object-fit: fill;
+  }
+}
+
+.comment-body {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-content {
+  background-color: utils.$color-white;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
+.comment-interaction {
+  margin: 0.25em 0.75em 1.25em auto;
+  font-size: small;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.like-count {
+  margin-right: 0.5em;
+}

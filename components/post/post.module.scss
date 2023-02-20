@@ -1,0 +1,116 @@
+@use "../../styles/utils" as utils;
+
+.wrapper {
+  background-color: white;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  border-bottom: 1px solid utils.$color-dark-gray;
+  padding: 0.5em 0;
+}
+
+.profile-picture-container {
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    object-fit: fill;
+  }
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.author {
+  color: utils.$color-blue;
+}
+
+.posted-at {
+  color: utils.$color-dark-gray;
+}
+
+.body {
+  padding: 2em 0;
+}
+
+.delete-icon {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+
+  div {
+    color: utils.$color-dark-gray;
+
+    div {
+      cursor: pointer;
+    }
+  }
+}
+
+.modal-wrapper {
+  height: auto;
+  width: 400px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40vh;
+  border-radius: 5px;
+  padding: 1em;
+}
+
+.modal-body {
+  padding: 2em 0;
+  border-bottom: 1px solid utils.$color-dark-gray;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+  padding-top: 1em;
+}
+
+.interaction {
+  border-top: 1px solid utils.$color-dark-gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 1em;
+}
+
+.like {
+  flex-grow: 1;
+  text-align: center;
+  // cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.like-icon {
+  cursor: pointer;
+}
+
+.like-count {
+  margin-left: 0.5em;
+}
+
+.comment {
+  flex-grow: 1;
+  text-align: center;
+  border-left: 1px solid utils.$color-dark-gray;
+  cursor: pointer;
+}

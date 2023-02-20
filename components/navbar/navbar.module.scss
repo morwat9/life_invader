@@ -1,0 +1,27 @@
+@use "../../styles/utils" as utils;
+
+.wrapper {
+  background-color: utils.$color-blue;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  width: utils.$large-width;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: utils.$color-white;
+}
+
+.brand {
+  font-size: 1.5em;
+}
+
+.tools {
+  display: flex;
+  flex-direction: row;
+  gap: 0 2em;
+}

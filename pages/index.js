@@ -1,14 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Share_Tech_Mono, Fira_Sans } from "@next/font/google";
 import styles from "../styles/Home.module.scss";
 import { TextField, Button } from "@mui/material";
 import { useCookies } from "react-cookie";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { useUserContext } from "../context/user/user.context";
 
-const shareTechMono = Share_Tech_Mono({ subsets: ["latin"], weight: "400" });
-const firaSans = Fira_Sans({ subsets: ["latin"], weight: "400" });
+import { shareTechMono, firaSans } from "../utils/fonts";
 
 export default function Home() {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -17,11 +17,12 @@ export default function Home() {
     email: "",
     password: "",
   });
+  const { userState, userDispatch } = useUserContext();
+  const router = useRouter();
 
   function handleInput(value) {
     setLogin({ email: value.email, password: value.password });
     setErr(false);
-    //TODO: Error handling for failed login attempts or validation
   }
 
   // all requests besides login will need this in the header to get db info. example vvvv
@@ -34,13 +35,25 @@ export default function Home() {
         "http://localhost:3000/users/login",
         login
       );
-      setCookie("token", response.data.accessToken);
-      console.log(response);
+      userDispatch({
+        id: response.data.id,
+        username: response.data.username,
+        profilePicture: response.data.profilePicture,
+      });
+      setCookie("token", response.data.accessToken, { sameSite: "none" });
+      localStorage.setItem("id", response.data.id);
+      router.push("/feed");
     } catch (error) {
       setErr(true);
       console.log(error.response);
     }
   }
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && cookies.token) {
+      router.push("/feed");
+    }
+  }, [cookies]);
 
   return (
     <>
