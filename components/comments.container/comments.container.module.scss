@@ -1,0 +1,83 @@
+@use "../../styles/_utils.scss" as utils;
+
+// .scroll-comments-container {
+//     overflow-y: auto;
+//     display: flex;
+//     flex-direction: column-reverse;
+// }
+
+.comments-container {
+  width: 400px;
+  background-color: utils.$color-gray;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15vh;
+  border-radius: 5px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column-reverse;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+// .comment-wrapper {
+//     display: flex;
+//     flex-direction: row;
+//     gap: .5em;
+// }
+
+.profile-picture-container {
+  width: 50px;
+  height: 50px;
+  display: inline;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    object-fit: fill;
+  }
+}
+
+// .comment-body {
+//     width: 100%;
+//     height: 100%;
+//     justify-content: center;
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// .comment-content {
+//     background-color: utils.$color-white;
+//     padding: .5em;
+//     border-radius: 10px;
+// }
+
+// .comment-interaction {
+//     margin: .25em .75em 1.25em auto;
+//     font-size: small;
+//     cursor: pointer;
+// }
+
+.add-comment {
+  border-top: 2px solid utils.$color-dark-gray;
+  padding: 1em 0;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.add-comment-button {
+  margin-left: auto;
+}
+
+.no-comments-yet {
+  height: 175px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.all-comments {
+  flex-direction: column-reverse;
+}

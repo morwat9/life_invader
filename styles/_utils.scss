@@ -1,5 +1,6 @@
 $color-white: #ffffff;
 $color-gray: #e5e5e5;
+$color-dark-gray: #bdbdbd;
 $color-orange: #fca311;
 $color-light-blue: #1976d2;
 $color-blue: #14213d;
@@ -7,7 +8,7 @@ $color-black: #000000;
 
 $small-width: 480px;
 $medium-width: 768px;
-$large-width: 930px;
+$large-width: 1060px;
 
 @mixin extra-small {
   @media (max-width: #{$small-width - 1px}) {
