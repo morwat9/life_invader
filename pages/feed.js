@@ -52,6 +52,7 @@ export default function Feed({ data }) {
         }
       })();
     }
+    setLoading(false)
   }, [userState]);
 
   async function refresh() {
