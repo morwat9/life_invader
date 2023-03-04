@@ -1,14 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Snackbar, Alert } from "@mui/material";
 import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useUserContext } from "../context/user/user.context";
-
 import { shareTechMono, firaSans } from "../utils/fonts";
+import SignUp from "../components/signup/signup";
 
 export default function Home() {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -17,6 +17,8 @@ export default function Home() {
     email: "",
     password: "",
   });
+  const [ openSignUp, setOpenSignUp ] = useState(false)
+  const [openSignupSuccess, setOpenSignupSuccess] = useState(false)
   const { userState, userDispatch } = useUserContext();
   const router = useRouter();
 
@@ -28,7 +30,7 @@ export default function Home() {
   // all requests besides login will need this in the header to get db info. example vvvv
   // const headers = { 'x-access-token': `${cookies.token}`}
   // const response = await axios.get("http://localhost:3000/users", {headers})
-  async function signIn(e) {
+  const signIn = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -47,6 +49,18 @@ export default function Home() {
       setErr(true);
       console.log(error.response);
     }
+  }
+
+  const handleCloseSignUp = () => {
+    setOpenSignUp(false)
+  }
+
+  const handleOpenSignupSuccess = () => {
+    setOpenSignupSuccess(true)
+  }
+
+  const handleCloseSignupSuccess = () => {
+    setOpenSignupSuccess(false)
   }
 
   useEffect(() => {
@@ -116,7 +130,7 @@ export default function Home() {
                 </div>
                 <div className={styles["break"]}></div>
                 <div>
-                  <Button variant="contained" color="secondary" size="large">
+                  <Button variant="contained" color="secondary" size="large" onClick={() => setOpenSignUp(true)}>
                     <b>Sign Up</b>
                   </Button>
                 </div>
@@ -124,6 +138,16 @@ export default function Home() {
             </form>
           </div>
         </div>
+        <SignUp 
+          openSignUp={openSignUp}
+          handleCloseSignUp={handleCloseSignUp}
+          handleOpenSignupSuccess={handleOpenSignupSuccess}
+        />
+        <Snackbar open={openSignupSuccess} autoHideDuration={6000} onClose={handleCloseSignupSuccess}>
+          <Alert onClose={handleCloseSignupSuccess} severity="success">
+                Sign up successful! Please login using your credentials.
+          </Alert>
+        </Snackbar>
       </main>
     </>
   );

@@ -1,0 +1,43 @@
+@use "../../styles/_utils.scss" as utils;
+
+.signup-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: utils.$color-gray;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+.signup-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+}
+
+.title {
+    font-size: xx-large;
+    text-align: center;
+    margin: 1em;
+    color: utils.$color-blue
+}
+
+.signup-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1em;
+    padding: 1em 0 0 0;
+}
+
+.error-text {
+    color: utils.$color-error;
+}
+
+.signup-wrapper ul {
+    color: utils.$color-dark-gray
+}
