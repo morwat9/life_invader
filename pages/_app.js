@@ -16,6 +16,13 @@ const theme = createTheme({
       main: "#14213D",
     },
   },
+  breakpoints: {
+    values: {
+      sm: 480,
+      md: 768,
+      lg: 1060,
+    }
+  }
 });
 
 export default function App({ Component, pageProps }) {

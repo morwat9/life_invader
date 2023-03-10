@@ -68,26 +68,13 @@ export default function CommentsContainer({
         </div>
         <div className={styles["all-comments"]}>
           {
-            // allComments.length > 0 ? allComments.map((comment) => (
-            //     <div className={styles['comment-wrapper']} key={comment._id}>
-            //         <div className={styles['profile-picture-container']}>
-            //             <img src={comment.author.profilePicture} />
-            //         </div>
-            //         <div className={styles['comment-body']}>
-            //             <div className={styles['comment-content']}>
-            //                 <span className={firaSans.className}>{comment.body}</span>
-            //             </div>
-            //             <div className={styles['comment-interaction']}>
-            //                 <span className={firaSans.className}>Like</span>
-            //             </div>
-            //         </div>
-            //     </div>
             allComments.length > 0 ? (
               allComments.map((comment) => (
                 <Comment
                   comment={comment}
                   userState={userState}
                   key={comment._id}
+                  refresh={refresh}
                 />
               ))
             ) : (

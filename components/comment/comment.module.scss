@@ -27,6 +27,23 @@
   flex-direction: column;
 }
 
+.comment-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.delete-icon {
+  color: utils.$color-dark-gray
+}
+
+.comment-author {
+  margin: 0.25em 0.25em 0.5em;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+}
+
 .comment-content {
   background-color: utils.$color-white;
   padding: 0.5em;
@@ -39,8 +56,35 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .like-count {
   margin-right: 0.5em;
+}
+
+.modal-wrapper {
+  height: auto;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40vh;
+  border-radius: 5px;
+  padding: 1em;
+  background-color: white;
+  @include utils.small-down {
+    width: 200px;
+  }
+}
+
+.modal-body {
+  padding: 2em 0;
+  border-bottom: 1px solid utils.$color-dark-gray;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+  padding-top: 1em;
 }

@@ -35,6 +35,12 @@ $large-width: 1060px;
   }
 }
 
+@mixin medium-down {
+  @media (max-width: #{$medium-width}){
+    @content;
+  }
+}
+
 @mixin medium-only {
   @media (min-width: #{$medium-width}) and (max-width: #{$large-width - 1px}) {
     @content;
@@ -49,6 +55,12 @@ $large-width: 1060px;
 
 @mixin large {
   @media (min-width: #{$large-width}) {
+    @content;
+  }
+}
+
+@mixin large-down {
+  @media (max-width: #{$large-width}){
     @content;
   }
 }

@@ -31,14 +31,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  gap: .25em
 }
 
 .author {
   color: utils.$color-blue;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: .25em;
+  align-items: flex-start;
+
 }
 
 .posted-at {
   color: utils.$color-dark-gray;
+  font-size: small;
 }
 
 .body {
@@ -108,9 +117,17 @@
   margin-left: 0.5em;
 }
 
+.comment-count {
+  margin-left: 0.5em
+}
+
 .comment {
   flex-grow: 1;
   text-align: center;
   border-left: 1px solid utils.$color-dark-gray;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
