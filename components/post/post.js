@@ -6,7 +6,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CommentIcon from "@mui/icons-material/Comment";
 import styled from "@emotion/styled";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const LikeButton = styled("div")(({ theme, liked }) => ({
   color: liked ? theme.palette.primary.main : "default",
@@ -22,6 +22,7 @@ export default function Post({
     post.likes.includes(userState.id) ? true : false
   );
   const [likes, setLikes] = useState(post.likes.length);
+
 
   async function handleLike() {
     try {
@@ -55,6 +56,9 @@ export default function Post({
           <div className={styles["author"]}>
             <span className={unbounded.className}>
               <b>{post.author.username}</b>
+            </span>
+            <span className={shareTechMono.className} style={{ fontSize: 'small' }}>
+              {post.author.email}
             </span>
           </div>
           <div className={styles["posted-at"]}>
@@ -99,6 +103,9 @@ export default function Post({
             }}
           >
             <CommentIcon fontSize="small" />
+          </div>
+          <div className={styles["comment-count"]}>
+            <span className={firaSans.className}>{post.comments.length > 0 ? post.comments.length : ""}</span>
           </div>
         </div>
       </div>

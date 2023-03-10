@@ -13,7 +13,7 @@ export default function Sidebar() {
       </div>
       <div className={styles["profile-container"]}>
         <span className={shareTechMono.className}>
-          {"@" + userState.username}
+          {userState.username}
         </span>
       </div>
     </div>

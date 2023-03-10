@@ -9,6 +9,9 @@
   margin-top: 40vh;
   border-radius: 5px;
   padding: 1em;
+  @include utils.small-down {
+    width: 200px;
+  }
 }
 
 .modal-body {

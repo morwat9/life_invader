@@ -7,13 +7,23 @@ import { useUserContext } from "../context/user/user.context";
 import axios from "axios";
 import SubmitPost from "../components/submit.post/submit.post";
 import FeedContainer from "../components/feed.container/feed.container";
+import { Tab, Tabs, CircularProgress, useMediaQuery, Select, MenuItem, InputLabel, FormControl, TextField } from "@mui/material";
 
 export default function Feed({ data }) {
   const [cookie, setCookie, removeCookie] = useCookies(["token"]);
   const [postData, setPostData] = useState(data);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('all')
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.up('sm'))
   const { userState, userDispatch } = useUserContext();
   const router = useRouter();
+  const categories = [
+    { value: 'all', label: "All"},
+    { value: 'jobs', label: "Jobs" },
+    { value: 'housing', label: "Housing" },
+    { value: 'services', label: "Services" },
+    { value: 'for sale', label: "For Sale" },
+  ]
 
   async function checkUser() {
     try {
@@ -29,6 +39,14 @@ export default function Feed({ data }) {
       return error;
     }
   }
+
+  const filteredFeed = postData.filter((post) => {
+    if (selectedCategory === 'all') {
+      return true
+    } else {
+      return post.category === selectedCategory
+    }
+  })
 
   useEffect(() => {
     if (typeof window !== "undefined" && userState.id === "") {
@@ -67,7 +85,7 @@ export default function Feed({ data }) {
   if (loading) {
     return (
       <div>
-        Looooooooooooooooooooooooooooooooooooooooooooooaaaaaaaaaaaaaaaaaaaading
+        <CircularProgress />
       </div>
     );
   } else {
@@ -75,8 +93,55 @@ export default function Feed({ data }) {
       <Layout>
         <div className={styles["wrapper"]}>
           <SubmitPost userState={userState} setRefreshData={refresh} />
+          {isSmallScreen ?
+            <Tabs
+              centered
+              value={selectedCategory}
+              onChange={(e, newValue) => {
+                setSelectedCategory(newValue)
+              }}
+            >
+              <Tab value="all" label="All" />
+              <Tab value="jobs" label="Jobs" />
+              <Tab value="housing" label="Housing" />
+              <Tab value="services" label="Services" />
+              <Tab value="for sale" label="For Sale" />
+            </Tabs>
+            :
+
+            <div className={styles["category-select"]}>
+              {/* <FormControl>
+                <InputLabel>Category</InputLabel>
+                <Select
+                  label="Category"
+                >
+                  <MenuItem>All</MenuItem>
+                  <MenuItem>Jobs</MenuItem>
+                  <MenuItem>Housing</MenuItem>
+                  <MenuItem>Services</MenuItem>
+                  <MenuItem>For Sale</MenuItem>
+                </Select>
+              </FormControl> */}
+              <TextField 
+              select
+              label="Filter By"
+              sx={{ minWidth: 120}}
+              size="small"
+              value={selectedCategory}
+              onChange={(e) => {
+                setSelectedCategory(e.target.value)
+              }}
+              >
+                {categories.map((category) => (
+                  <MenuItem key={category.value} value={category.value}>
+                    {category.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+          }
           <div className={styles["feed-container"]}>
-            <FeedContainer data={postData} setRefreshData={refresh} />
+            <FeedContainer data={filteredFeed} setRefreshData={refresh} />
           </div>
         </div>
       </Layout>
