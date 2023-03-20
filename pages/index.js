@@ -29,12 +29,12 @@ export default function Home() {
 
   // all requests besides login will need this in the header to get db info. example vvvv
   // const headers = { 'x-access-token': `${cookies.token}`}
-  // const response = await axios.get("http://localhost:3000/users", {headers})
+  // const response = await axios.get("${process.env.NEXT_PUBLIC_API_URL}/users", {headers})
   const signIn = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/users/login",
+        `${process.env.NEXT_PUBLIC_API_URL}/users/login`,
         login
       );
       userDispatch({

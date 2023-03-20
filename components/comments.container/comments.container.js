@@ -18,7 +18,7 @@ export default function CommentsContainer({
   async function refresh() {
     try {
       const comments = await axios.get(
-        `http://localhost:3000/comments/get-comments/${postId}`
+        `${process.env.NEXT_PUBLIC_API_URL}/comments/get-comments/${postId}`
       );
       setAllComments(comments.data);
     } catch (error) {
@@ -29,7 +29,7 @@ export default function CommentsContainer({
   async function saveComment() {
     try {
       const commentResponse = await axios.post(
-        `http://localhost:3000/comments/add-comment/${postId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/comments/add-comment/${postId}`,
         { author: userState.id, source: postId, body: commentBody }
       );
       setCommentBody("");

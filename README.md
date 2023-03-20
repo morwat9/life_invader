@@ -1,1 +1,1 @@
-Social Media Clone Client Side Built With Next.js
+Local Classifieds Clone Client Side Built With Next.js

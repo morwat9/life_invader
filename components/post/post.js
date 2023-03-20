@@ -28,14 +28,14 @@ export default function Post({
     try {
       if (!liked) {
         const result = await axios.put(
-          `http://localhost:3000/likes/post-add/${post._id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/likes/post-add/${post._id}`,
           { id: userState.id }
         );
         setLiked(true);
         setLikes(likes + 1);
       } else {
         const result = await axios.put(
-          `http://localhost:3000/likes/post-remove/${post._id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/likes/post-remove/${post._id}`,
           { id: userState.id }
         );
         setLiked(false);

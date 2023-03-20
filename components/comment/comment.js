@@ -18,14 +18,14 @@ export default function Comment({ comment, userState, refresh }) {
     try {
       if (!liked) {
         const result = await axios.put(
-          `http://localhost:3000/likes/comment-add/${comment._id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/likes/comment-add/${comment._id}`,
           { id: userState.id }
         );
         setLiked(true);
         setLikes(likes + 1);
       } else {
         const result = await axios.put(
-          `http://localhost:3000/likes/comment-remove/${comment._id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/likes/comment-remove/${comment._id}`,
           { id: userState.id }
         );
         setLiked(false);
@@ -38,7 +38,7 @@ export default function Comment({ comment, userState, refresh }) {
 
   async function deleteComment() {
     try {
-      await axios.delete(`http://localhost:3000/comments/${deleteId}`)
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/comments/${deleteId}`)
       refresh()
     } catch (error) {
       console.log(error)

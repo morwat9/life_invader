@@ -28,7 +28,7 @@ export default function Feed({ data }) {
   async function checkUser() {
     try {
       const id = window.localStorage.getItem("id");
-      const user = await axios.get(`http://localhost:3000/users/${id}`, {
+      const user = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
         "x-access-token": userState.cookie,
       });
       if (!user) {
@@ -75,7 +75,7 @@ export default function Feed({ data }) {
 
   async function refresh() {
     try {
-      const result = await axios.get("http://localhost:3000/posts/feed");
+      const result = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts/feed`);
       setPostData(result.data);
     } catch (error) {
       console.log(error);
@@ -150,7 +150,7 @@ export default function Feed({ data }) {
 }
 
 export async function getServerSideProps() {
-  const posts = await axios.get("http://localhost:3000/posts/feed");
+  const posts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/posts/feed`);
   const data = posts.data;
   return { props: { data } };
 }

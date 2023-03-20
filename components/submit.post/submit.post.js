@@ -32,7 +32,7 @@ export default function SubmitPost({ userState, setRefreshData }) {
 
 
     try {
-      const response = await axios.post("http://localhost:3000/posts", {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
         author: userState.id,
         body: post.body,
         category: post.category
