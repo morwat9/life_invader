@@ -77,7 +77,7 @@ export default function SignUp({ openSignUp, handleCloseSignUp, handleOpenSignup
 
         try {
             console.log('hit?')
-            const result = await axios.post('http://localhost:3000/users/', newUser)
+            const result = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/`, newUser)
             handleCloseSignUp()
             setNewUser({
                 username: "",

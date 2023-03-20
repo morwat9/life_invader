@@ -43,7 +43,7 @@ export default function FeedContainer({ data, setRefreshData }) {
   async function deletePost() {
     try {
       const result = await axios.delete(
-        `http://localhost:3000/posts/${deleteId}`
+        `${process.env.NEXT_PUBLIC_API_URL}/posts/${deleteId}`
       );
       handleCloseDelete();
       setRefreshData();
